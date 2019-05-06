@@ -3,6 +3,7 @@ package com.jsrdxzw.github.ui.login
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
@@ -16,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 
 import com.jsrdxzw.github.R
+import com.jsrdxzw.github.util.Settings
 
 class LoginActivity : AppCompatActivity() {
 
@@ -64,11 +66,16 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
+        username.setText(Settings.email)
+        password.setText(Settings.password)
+
+
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
                 username.text.toString(),
                 password.text.toString()
             )
+
         }
 
         password.apply {
